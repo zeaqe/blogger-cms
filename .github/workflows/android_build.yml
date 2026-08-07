@@ -20,14 +20,14 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Generate Gradle Wrapper
-      run: gradle wrapper --gradle-version 8.5
+   # 2. Setup Gradle secara resmi (Akan otomatis membaca versi dari proyek atau menggunakan versi stabil)
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-      
+    # 3. Build APK langsung menggunakan gradle (tanpa perlu perintah 'gradle wrapper' manual)
     - name: Build Debug APK
-      run: ./gradlew assembleDebug
+      run: gradle assembleDebug
+      
       
     - name: Upload APK
       uses: actions/upload-artifact@v4
