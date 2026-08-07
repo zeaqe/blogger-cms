@@ -1,4 +1,3 @@
-// HistoryDatabase.kt
 package com.zeaqe.bloggercms.data
 
 import androidx.room.*
@@ -6,7 +5,7 @@ import androidx.room.*
 @Entity(tableName = "history")
 data class HistoryEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val action: String, // e.g., "Created Post", "Updated Draft"
+    val action: String,
     val postId: String?,
     val timestamp: Long = System.currentTimeMillis()
 )
@@ -20,7 +19,7 @@ interface HistoryDao {
     suspend fun insertHistory(history: HistoryEntity)
 }
 
-@Database(entities = [HistoryEntity::class], version = 1)
+@Database(entities = [HistoryEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun historyDao(): HistoryDao
 }

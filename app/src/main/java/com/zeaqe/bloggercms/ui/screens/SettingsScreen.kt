@@ -4,10 +4,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -30,19 +30,9 @@ fun SettingsScreen() {
     Column(modifier = Modifier.padding(16.dp)) {
         Text("Blogger Configuration", style = MaterialTheme.typography.headlineSmall)
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(
-            value = tempBlogId,
-            onValueChange = { tempBlogId = it },
-            label = { Text("Blogger Blog ID") },
-            modifier = Modifier.fillMaxWidth()
-        )
+        OutlinedTextField(value = tempBlogId, onValueChange = { tempBlogId = it }, label = { Text("Blogger Blog ID") }, modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            value = tempAuthToken,
-            onValueChange = { tempAuthToken = it },
-            label = { Text("OAuth 2.0 Access Token") },
-            modifier = Modifier.fillMaxWidth()
-        )
+        OutlinedTextField(value = tempAuthToken, onValueChange = { tempAuthToken = it }, label = { Text("OAuth 2.0 Access Token") }, modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
             scope.launch {
@@ -51,8 +41,6 @@ fun SettingsScreen() {
                     settings[AUTH_TOKEN] = tempAuthToken
                 }
             }
-        }) {
-            Text("Save Settings")
-        }
+        }) { Text("Save Settings") }
     }
 }

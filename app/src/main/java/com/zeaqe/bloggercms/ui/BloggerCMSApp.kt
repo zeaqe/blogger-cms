@@ -2,13 +2,18 @@ package com.zeaqe.bloggercms.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Article
+import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Public
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Upload
+import androidx.compose.material.icons.filled.Web
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -45,9 +50,7 @@ fun BloggerCMSApp() {
                         icon = { Icon(item.icon, contentDescription = item.title) },
                         selected = false,
                         onClick = {
-                            navController.navigate(item.route) {
-                                launchSingleTop = true
-                            }
+                            navController.navigate(item.route) { launchSingleTop = true }
                             scope.launch { drawerState.close() }
                         },
                         modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp)
@@ -68,11 +71,7 @@ fun BloggerCMSApp() {
                 )
             }
         ) { padding ->
-            NavHost(
-                navController = navController,
-                startDestination = "posts",
-                modifier = Modifier.padding(padding)
-            ) {
+            NavHost(navController, startDestination = "posts", modifier = Modifier.padding(padding)) {
                 composable("posts") { PostsScreen(navController) }
                 composable("editor/{postId}") { backStackEntry ->
                     EditorScreen(navController, backStackEntry.arguments?.getString("postId"))
