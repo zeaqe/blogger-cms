@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BloggerCMS"
+rootProject.name = "blogger-cms"
 include(":app")
